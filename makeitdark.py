@@ -14,17 +14,17 @@ injectable = "document.addEventListener(\"DOMContentLoaded\", function() {  \n\
     :root {  \n\
         /* Modify these to change your theme colors: */  \n\
         --primary: #61AFEF;  \n\
-        --text: #00FF00;  \n\
+        --text: #28E2D3;  \n\
     }  \n\
     div.c-message.c-message--light.c-message--hover {  \n\
-        color: #00FF00 !important;  \n\
+        color: #28E2D3 !important;  \n\
     }  \n\
    \n\
     a.c-message__sender_link { color: #FFFFFF !important; }  \n\
    \n\
     span.c-message__body, span.c-message_attachment__media_trigger.c-message_attachment__media_trigger--caption,  \n\
     div.p-message_pane__foreword__description span {  \n\
-        color: #00FF00 !important;  \n\
+        color: #1db7aa !important;  \n\
         font-family: \"Fira Code\", Arial, Helvetica, sans-serif;  \n\
         text-rendering: optimizeLegibility;  \n\
         font-size: 14px;  \n\
@@ -88,14 +88,16 @@ elif platform == "darwin":
 else:
     # Probably Windows
     slack_root_path = os.path.join(os.environ['LOCALAPPDATA'], "slack")
-    most_recent = sorted([slack_version for slack_version in os.listdir(slack_root_path) if slack_version.startswith("app-") and os.path.isdir(os.path.join(slack_root_path, slack_version))], reverse=True)[0]
-    print("Searching for most recent slack update in {0}".format(slack_root_path))
+    most_recent = sorted([slack_version for slack_version in os.listdir(slack_root_path) if slack_version.startswith(
+        "app-") and os.path.isdir(os.path.join(slack_root_path, slack_version))], reverse=True)[0]
+    print("Searching for most recent slack update in {0}".format(
+        slack_root_path))
     print("Found {0}".format(most_recent))
-    slack_theme_path = os.path.join(slack_root_path, most_recent, "resources", "app.asar.unpacked", "src", "static", "ssb-interop.js")
+    slack_theme_path = os.path.join(
+        slack_root_path, most_recent, "resources", "app.asar.unpacked", "src", "static", "ssb-interop.js")
 
 f = open(slack_theme_path, "a+")
 f.write("\n" + injectable)
 f.close()
 print("Your slack theme has been updated, please restart slack")
 exit()
-
